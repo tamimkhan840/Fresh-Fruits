@@ -4,9 +4,9 @@ import { AuthContext } from "../context";
 
 // eslint-disable-next-line react/prop-types
 export default function PrivateRoutes({ children }) {
-  const { users, loader } = useContext(AuthContext);
+  const { users, isLoader } = useContext(AuthContext);
 
-  if (loader) {
+  if (isLoader) {
     return <span className="loading loading-bars loading-lg"></span>;
   }
 
