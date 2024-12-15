@@ -7,7 +7,7 @@ export default function PrivateRoutes({ children }) {
   const { users, isLoader } = useContext(AuthContext);
 
   if (isLoader) {
-    return <span className="loading loading-bars loading-lg"></span>;
+    return <span className="loading loading-bars loading-lg h-[20vw]"></span>;
   }
 
   if (users) {

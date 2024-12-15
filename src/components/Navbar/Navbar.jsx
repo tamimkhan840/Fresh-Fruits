@@ -8,16 +8,18 @@ import DarkMode from "./DarkMode";
 import { Link } from "react-router";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context";
+import { FiMenu } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 
 
 const Navbar = ({ handleOrderPopup }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { users, setUsers, signOutUser } = useContext(AuthContext);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Toggle menu
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsOpen(!isOpen);
   };
 
   // Menu Array Based on User Authentication
@@ -101,7 +103,7 @@ const Navbar = ({ handleOrderPopup }) => {
               </div>
               <div className="cursor-pointer  ">
                 {
-                  users ? <Link to={"/"} onClick={handleSinOutClick} className="px-1 md:px-3 bg-red-500 rounded py-2 text-base">Logout</Link>:<Link className="px-3 py-2 bg-sky-500 rounded" to={"/profile"}>
+                  users ? <Link to={"/login"} onClick={handleSinOutClick} className="px-1 md:px-3 bg-red-500 rounded py-2 text-base">Logout</Link>:<Link className="px-3 py-2 bg-sky-500 rounded" to={"/login"}>
                   Login
                   </Link>
                 }
@@ -130,23 +132,32 @@ const Navbar = ({ handleOrderPopup }) => {
       </div>
 
       {/* Icon for small devices */}
-      <div
-        className="fixed bottom-4 right-4 sm:hidden flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full shadow-lg cursor-pointer"
-        onClick={toggleMenu}
-      >
-        {isMenuOpen ? "Close" : "Menu"}
-      </div>
+
+      {
+        isOpen ? <div className="md:hidden px-4">
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <IoClose size={24} />
+        </button>
+            </div> :<div className="md:hidden px-4">
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <FiMenu size={24} />
+        </button>
+       </div>
+      }
+
+
 
       {/* Slide-down menu */}
-      <div
-        className={`fixed top-0 left-0 w-full bg-black text-white transition-transform duration-300 ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}`}
+      {
+        isOpen && <div
+        className="md:hidden absolute top-20 left-0 w-full rounded-b-xl shadow-lg bg-slate-50/70 text-black transition-all duration-1000 border-e-base-300"
       >
-        <ul className="flex flex-col items-center gap-4 py-8">
+        <ul className="flex flex-col items-center justify-center space-y-4 py-5">
           {Menu.map((data) => (
             <li key={data.id}>
               <Link
                 to={data.link}
-                className="text-white hover:text-primary duration-200"
+                className="text-black hover:text-primary duration-200 font-semibold"
                 onClick={toggleMenu} // Close menu on click
               >
                 {data.name}
@@ -155,6 +166,7 @@ const Navbar = ({ handleOrderPopup }) => {
           ))}
         </ul>
       </div>
+      }
       </div>
       </div>
     </>
