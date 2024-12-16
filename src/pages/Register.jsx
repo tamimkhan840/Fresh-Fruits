@@ -26,16 +26,13 @@ function Register() {
 
     console.log(term);
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
     setErr("")
     if (password.length < 6) {
       setErr("password should be at least 6 character")
       return;
     }
-    if (!passwordRegex.test(password)) {
-      setErr("password at least one uppercase one lowercase one digit one spacial character")
-      return;
-    }
+    
     if (!term) {
       setErr("Please checked the term")
     }

@@ -1,10 +1,12 @@
-import React from "react";
+
+import { useContext } from "react";
 import Img1 from "../../assets/women/women.png";
 import Img2 from "../../assets/women/women2.jpg";
 import Img3 from "../../assets/women/women3.jpg";
 import Img4 from "../../assets/women/women4.jpg";
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router";
+import { AuthContext } from "../../context";
 
 const ProductsData = [
   {
@@ -50,6 +52,7 @@ const ProductsData = [
 ];
 
 const Products = () => {
+  const {users} = useContext(AuthContext)
   return (
     <div className="mt-14 mb-12">
       <div className="container">
@@ -89,7 +92,7 @@ const Products = () => {
                     <FaStar className="text-yellow-400" />
                     <span>{data.rating}</span>
                   </div>
-                    <Link to={"/allproduct"} className="bg-primary hover:scale-105 duration-300 text-white py-1 px-4 rounded-full mt-4 group-hover:bg-white group-hover:text-primary">Show All</Link>
+                    <Link  to={users ? "/allproduct" : "/login"} className="bg-primary hover:scale-105 duration-300 text-white py-1 px-4 rounded-full mt-4 group-hover:bg-white group-hover:text-primary">Show All</Link>
                 </div>
               </div>
             ))}

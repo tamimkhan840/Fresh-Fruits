@@ -40,7 +40,7 @@ const Main = () => {
       <TopProducts handleOrderPopup={handleOrderPopup} />
       <Banner />
       <Subscribe />
-      <Products />
+      
       <Testimonials />
 
       <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
