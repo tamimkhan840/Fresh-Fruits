@@ -8,6 +8,7 @@ import Main from "../pages/Main";
 import Profile from "../pages/Profile";
 import PrivateRoutes from "./PrivateRoutes";
 import Allproduct from "../pages/Allproduct";
+import ProductWear from "../pages/ProductWear";
 
 
 
@@ -43,6 +44,12 @@ const route = createBrowserRouter([
                 element:<PrivateRoutes>
                          <Allproduct />
                       </PrivateRoutes>
+            },
+            {
+                path: "/productWear",
+                element:
+                         <ProductWear />
+
             },
             {
                 path: "/profile",

@@ -102,12 +102,12 @@ function Allproduct() {
   return (
 
     <>
-    <section className="py-8 bg-gray-100">
+        <section className="py-8 bg-gray-100">
             <div className="container mx-auto px-4">
                 <h2 className="text-2xl font-bold text-center mb-6">
                     {`Women's Clothing`}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 container">
                     {womenClothing.map((item) => (
                         <div
                         data-aos="fade-up"

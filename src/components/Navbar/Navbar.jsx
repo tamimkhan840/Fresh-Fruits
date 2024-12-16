@@ -37,7 +37,7 @@ const Navbar = ({ handleOrderPopup }) => {
     {
       id: 3,
       name: "Kids Wear",
-      link: "/#",
+      link: "/productWear",
     },
 
 
