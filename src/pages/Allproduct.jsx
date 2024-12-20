@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router";
+import { AuthContext } from "../context";
 
 const womenClothing = [
     {
@@ -7,6 +9,7 @@ const womenClothing = [
         price: 1200.99,
         rating: 4.5,
         color: "Red",
+        description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
         image: "https://www.mysoresareeudyog.com/media/wysiwyg/art_silk_1.PNG",
     },
     {
@@ -15,6 +18,7 @@ const womenClothing = [
         price: 750.5,
         rating: 4.2,
         color: "White",
+        description: "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, lightweight & soft fabric for breathable wearing.",
         image: "https://s.alicdn.com/@sc04/kf/H6b35ccd35ba24bb3aa3fd013adcd421dw.jpg",
     },
     {
@@ -23,6 +27,7 @@ const womenClothing = [
         price: 4599.99,
         rating: 4.8,
         color: "Pink",
+        description: "Great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions.",
         image: "https://glamourental.com/cdn/shop/files/Stunning_Cream_Georgette_Lehenga_Choli_with_Intricate_Sequins_-_Rent.jpg",
     },
     {
@@ -31,6 +36,7 @@ const womenClothing = [
         price: 2200.0,
         rating: 4.6,
         color: "Blue",
+        description: "The color could be slightly different between on the screen and in practice.",
         image: "https://www.inddus.com/cdn/shop/products/pink-net-partywear-anarkali-suit-478503.jpg",
     },
     {
@@ -39,6 +45,7 @@ const womenClothing = [
         price: 450.49,
         rating: 4.1,
         color: "Yellow",
+        description: "From our Legends Collection, the Naga was inspired by the mythical water dragon.",
         image: "https://www.kayseria.com/cdn/shop/files/GTX5695-73-_1.jpg",
     },
     {
@@ -47,6 +54,7 @@ const womenClothing = [
         price: 1599.89,
         rating: 4.3,
         color: "Dark Blue",
+        description: "Satisfaction Guaranteed. Return or exchange any order within 30 days.",
         image: "https://shopaudaciousboutique.com/cdn/shop/files/IMG_6165_1_2048x.jpg",
     },
     {
@@ -55,6 +63,7 @@ const womenClothing = [
         price: 999.99,
         rating: 4.7,
         color: "Golden",
+        description: "Classic Created Wedding Engagement Solitaire Diamond Promise Ring.",
         image: "https://i.ebayimg.com/images/g/AOMAAOSwuEheUd88/s-l1600.webp",
     },
     {
@@ -63,6 +72,7 @@ const womenClothing = [
         price: 3200.0,
         rating: 4.9,
         color: "Maroon",
+        description: "Rose Gold Plated Double Flared Tunnel Plug Earrings.",
         image: "https://www.kayseria.com/cdn/shop/files/GTX5695-73-_1.jpg",
     },
     {
@@ -71,6 +81,7 @@ const womenClothing = [
         price: 899.5,
         rating: 4.2,
         color: "Green",
+        description: "Fast data transfers, improved PC performance, and high capacity.",
         image: "https://images.pexels.com/photos/28831537/pexels-photo-28831537/free-photo-of-elegant-eastern-bridal-fashion-portrait.jpeg",
     },
     {
@@ -79,6 +90,7 @@ const womenClothing = [
         price: 1400.99,
         rating: 4.4,
         color: "Floral",
+        description: "Easy upgrade for faster boot up, shutdown, and app load.",
         image: "https://images.pexels.com/photos/11556942/pexels-photo-11556942.jpeg",
     },
 ];
@@ -86,6 +98,7 @@ const womenClothing = [
 
 function Allproduct() {
     const [favorites, setFavorites] = useState([]);
+     const {addToCart,setAddToCart, setProduct} = useContext(AuthContext)
 
     const toggleFavorite = (id) => {
         setFavorites((prev) =>
@@ -93,11 +106,18 @@ function Allproduct() {
         );
     };
 
-    const handleAddToCart = (item) => {
-        alert(`"${item.name}" added to cart!`);
+    const addHandler = (product) => {
+      console.log(product);
+      
+      const exist = addToCart.find((item) => item.id === product.id);
+
+      if (!exist) {
+        setAddToCart([...addToCart, product]);
+      }
     };
-
-
+    const productHandler = (item) => {
+      setProduct(item)
+    };
 
   return (
 
@@ -166,26 +186,27 @@ function Allproduct() {
                           </div>
 
                           {/* Add to Cart Button */}
-                          <button
-                            onClick={() => handleAddToCart(item)}
-                            className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 flex items-center justify-center space-x-2"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              className="w-5 h-5"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3 3h2l.401 2m2.598 9h9.005M16 13.5A2.5 2.5 0 1 1 18.5 16 2.5 2.5 0 0 1 16 13.5ZM7 13.5A2.5 2.5 0 1 1 9.5 16 2.5 2.5 0 0 1 7 13.5ZM7.401 6h10.346a1 1 0 0 1 .956.742L21 11H6.374"
-                              />
-                            </svg>
-                            <span>Add to Cart</span>
-                          </button>
+                          <div className="flex flex-row justify-between items-center">
+                        <button
+                          onClick={() => addHandler(item)}
+                          className={` px-3 rounded-md py-2 text-center text-white transition-opacity duration-300 ${
+                            addToCart.find((items) => items.id === item.id)
+                              ? "bg-rose-500"
+                              : "bg-black"
+                          }`}
+                        >
+                          {addToCart.find((items) => items.id === item.id)
+                            ? "Already Added"
+                            : "Add To Cart"}
+                        </button>
+                        <Link
+                          to={`/Products/${item.id}`}
+                          onClick={() => productHandler(item)}
+                          className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 flex items-center justify-center space-x-2"
+                        >
+                          Details
+                        </Link>
+                      </div>
                         </div>
                       </div>
 

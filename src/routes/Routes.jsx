@@ -9,6 +9,8 @@ import Profile from "../pages/Profile";
 import PrivateRoutes from "./PrivateRoutes";
 import Allproduct from "../pages/Allproduct";
 import ProductWear from "../pages/ProductWear";
+import AddToCart from "../addToCart/AddToCart";
+import Product_Details from "../pages/Product_Details";
 
 
 
@@ -50,6 +52,14 @@ const route = createBrowserRouter([
                 element:
                          <ProductWear />
 
+            },
+            {
+                path: '/add-to-cart',
+                element: <AddToCart />
+            },
+            {
+                path: '/Products/:details',
+                element: <Product_Details />
             },
             {
                 path: "/profile",

@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 export default function AuthProvider({children}) {
     const [users, setUsers] = useState(null)
     const [isLoader, setIsLoader] = useState(true)
+    const [addToCart,setAddToCart] = useState([])
+    const [product, setProduct] = useState('')
+
 
     const createUser = (email, password) =>{
         setIsLoader(true)
@@ -44,7 +47,11 @@ export default function AuthProvider({children}) {
         createUser,
         signIn,
         isLoader,
-        signOutUser
+        signOutUser,
+        setAddToCart,
+        addToCart,
+        setProduct,
+        product
 
     }
 
